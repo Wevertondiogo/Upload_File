@@ -6,6 +6,7 @@ namespace Upload_File.Controllers
 {
     public class UploadController : Controller
     {
+        private readonly string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Files");
         public IActionResult Index()
         {
             var model = new SingleFileModel();
@@ -18,8 +19,6 @@ namespace Upload_File.Controllers
             if (ModelState.IsValid)
             {
                 model.IsResponse = true;
-                var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Files");
-
                 if (!Directory.Exists(path)) Directory.CreateDirectory(path);
 
                 var fileInfo = new FileInfo(model.File.FileName);
@@ -53,8 +52,6 @@ namespace Upload_File.Controllers
                 {
                     foreach (var file in model.Files)
                     {
-                        var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Files");
-                        //create folder if not exist
                         if (!Directory.Exists(path))
                             Directory.CreateDirectory(path);
 
